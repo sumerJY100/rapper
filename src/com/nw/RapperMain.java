@@ -13,26 +13,45 @@ public class RapperMain {
 	}
 
 	public static void main(String[] args) {
-		int c = 3600*24;
+//		int c = 3600*24*3;
+		int c = 1350;
 
 		RapperMain rapperMain = new RapperMain();
 
 		RapperEntity rapperEntity1 = new RapperEntity("01组", 190, 18);
-		RapperEntity rapperEntity2 = new RapperEntity("02组", 225, 12);
-		RapperEntity rapperEntity3 = new RapperEntity("03组", 258, 18);
-		RapperEntity rapperEntity4 = new RapperEntity("04组", 280, 12);
+		RapperEntity rapperEntity2 = new RapperEntity("02组", 222, 12);
+		RapperEntity rapperEntity3 = new RapperEntity("03组", 465, 18);
+		RapperEntity rapperEntity4 = new RapperEntity("04组", 483, 12);
+		RapperEntity rapperEntity5 = new RapperEntity("05组", 640, 18);
+		RapperEntity rapperEntity6 = new RapperEntity("06组", 686, 12);
+		RapperEntity rapperEntity7 = new RapperEntity("07组", 1064, 24);
+		RapperEntity rapperEntity8 = new RapperEntity("08组", 1220, 18);
+//		RapperEntity rapperEntity1 = new RapperEntity("01组", 400, 18);
+//		RapperEntity rapperEntity2 = new RapperEntity("02组", 200, 12);
+//		RapperEntity rapperEntity3 = new RapperEntity("03组", 800, 18);
+//		RapperEntity rapperEntity4 = new RapperEntity("04组", 300, 12);
+//		RapperEntity rapperEntity5 = new RapperEntity("05组", 900, 18);
+//		RapperEntity rapperEntity6 = new RapperEntity("06组", 500, 12);
+//		RapperEntity rapperEntity7 = new RapperEntity("07组", 1200, 24);
+//		RapperEntity rapperEntity8 = new RapperEntity("08组", 600, 18);
 
 		List<RapperEntity> list = new ArrayList<RapperEntity>();
 		list.add(rapperEntity1);
 		list.add(rapperEntity2);
 		list.add(rapperEntity3);
 		list.add(rapperEntity4);
+		list.add(rapperEntity5);
+		list.add(rapperEntity6);
+		list.add(rapperEntity7);
+		list.add(rapperEntity8);
 
 		for (int i = 0; i < c; i++) {
-			rapperEntity1.subCount();
-			rapperEntity2.subCount();
-			rapperEntity3.subCount();
-			rapperEntity4.subCount();
+			for(RapperEntity re:list){
+				re.subCount();
+			}
+		}
+		for(RapperEntity re:list){
+			System.out.println(re);
 		}
 //		System.out.println(rapperEntity1);
 //		System.out.println(rapperEntity2);
@@ -65,6 +84,7 @@ public class RapperMain {
 							if ((tempL.getEndNum() + 1) == currentLocation) {
 								tempL.setEndNum(currentLocation);
 								tempL.setTotalNum(tempL.getTotalNum() + 1);
+								tempL.addCoincide(num);
 							} else {
 								tempL = null;
 							}
@@ -78,6 +98,7 @@ public class RapperMain {
 					tL.setStartNum(currentLocation);
 					tL.setTotalNum(1);
 					tL.setEndNum(currentLocation);
+					tL.addCoincide(num);
 					lList.add(tL);
 				}
 
@@ -96,7 +117,7 @@ public class RapperMain {
 		System.out.println("sum:" + sum);
 
 		for (int i = 0; i < lList.size(); i++) {
-			System.out.println(lList.get(i).getStartNum() + "," + lList.get(i).getTotalNum());
+			System.out.println(lList.get(i).getStartNum() + "," + lList.get(i).getTotalNum() +""+lList.get(i).getCoincideString()+"");
 		}
 	}
 

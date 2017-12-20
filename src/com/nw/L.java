@@ -10,12 +10,18 @@ public class L{
 	private int startNum;//开始编号
 	private int endNum ;//结束编号
 	private int totalNum;//总计重合时间数量
+	private List<Integer> coincideCountList = new ArrayList<Integer>();//当前时间重合的振打器的数量
 	private List<Integer> list = new ArrayList<Integer>();
 	private Map<Integer,Integer> map = new HashMap<Integer,Integer>();
 	public L(){
 		
 	}
-	
+	public void addCoincide(int coincide){
+		this.coincideCountList.add(coincide);
+	}
+	public String getCoincideString(){
+		return this.coincideCountList.toString();
+	}
 	public void addCompareRapper(int i, int num) {
 		int nextIndex = index + totalNum;
 		if(i == nextIndex){
@@ -65,6 +71,8 @@ public class L{
 	public void setIndex(int index) {
 		this.index = index;
 	}
+
+
 	
 	
 }
