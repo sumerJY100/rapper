@@ -13,7 +13,7 @@ public class RapperMain {
 	}
 
 	public static void main(String[] args) {
-		int c = 600;
+		int c = 3600*24;
 
 		RapperMain rapperMain = new RapperMain();
 
@@ -34,10 +34,10 @@ public class RapperMain {
 			rapperEntity3.subCount();
 			rapperEntity4.subCount();
 		}
-		System.out.println(rapperEntity1);
-		System.out.println(rapperEntity2);
-		System.out.println(rapperEntity3);
-		System.out.println(rapperEntity4);
+//		System.out.println(rapperEntity1);
+//		System.out.println(rapperEntity2);
+//		System.out.println(rapperEntity3);
+//		System.out.println(rapperEntity4);
 
 		int currentLocation = 0;
 		int lastLocation = -1;
@@ -57,8 +57,8 @@ public class RapperMain {
 				// 查询当前是否连续以前的重合振打
 				// 当前振打的
 				// 查询当前的重合振打，是否属于某一个重合振打组
+				L tempL = null;
 				if ((currentLocation - lastLocation) == 1) {
-					L tempL = null;
 					for (int m = 0; m < lList.size(); m++) {
 						tempL = lList.get(m);
 						if (null != tempL) {
@@ -72,25 +72,22 @@ public class RapperMain {
 
 						}
 					}
-					if (null == tempL) {
-						L tL = new L();
-						tL.setIndex(currentLocation);
-						tL.setStartNum(currentLocation);
-						tL.setTotalNum(1);
-						tL.setEndNum(currentLocation);
-						lList.add(tL);
-					}
 				} else {
-
+					L tL = new L();
+					tL.setIndex(currentLocation);
+					tL.setStartNum(currentLocation);
+					tL.setTotalNum(1);
+					tL.setEndNum(currentLocation);
+					lList.add(tL);
 				}
 
 				L l = rapperMain.getL(i, num);
 				sum++;
 				// l.addCompareRapper(i,num);
 				if ((currentLocation - lastLocation) == 1) {
-					System.out.println("begin------------------" + i + "-----" + num + ",sum:" + sum);
+//					System.out.println("begin------------------" + i + "-----" + num + ",sum:" + sum);
 				} else {
-					System.out.println("end-----" + i + "------" + num + ",sum:" + sum);
+//					System.out.println("end-----" + i + "------" + num + ",sum:" + sum);
 				}
 				// System.out.println(i + " ---" + num);
 				lastLocation = i;
