@@ -13,7 +13,9 @@ public class RapperMain {
 	}
 
 	public static void main(String[] args) {
-		int c = 50000;
+		int c = 600;
+
+		RapperMain rapperMain = new RapperMain();
 
 		RapperEntity rapperEntity1 = new RapperEntity("01组", 190, 18);
 		RapperEntity rapperEntity2 = new RapperEntity("02组", 225, 12);
@@ -42,32 +44,87 @@ public class RapperMain {
 		int sum = 0;
 		for (int i = 0; i < c; i++) {
 			int num = 0;
-			if (rapperEntity1.getStateByLocation(i).equals("+")){
-				num ++;
+			List<RapperEntity> rapperEntityList = new ArrayList<RapperEntity>();
+			for (RapperEntity re : list) {
+				if (re.getStateByLocation(i).equals("+")) {
+					num++;
+					rapperEntityList.add(re);
+				}
 			}
-			if (rapperEntity2.getStateByLocation(i).equals("+")){
-				num ++;
-			}
-			if (rapperEntity3.getStateByLocation(i).equals("+")){
-				num ++;
-			}
-			if (rapperEntity4.getStateByLocation(i).equals("+")){
-				num ++;
-			}
-			
-			if(num > 1){
-				sum ++;
+
+			if (num > 1) {
 				currentLocation = i;
-				if((currentLocation - lastLocation) == 1){
+				// 查询当前是否连续以前的重合振打
+				// 当前振打的
+				// 查询当前的重合振打，是否属于某一个重合振打组
+				if ((currentLocation - lastLocation) == 1) {
+					L tempL = null;
+					for (int m = 0; m < lList.size(); m++) {
+						tempL = lList.get(m);
+						if (null != tempL) {
+							if ((tempL.getEndNum() + 1) == currentLocation) {
+								tempL.setEndNum(currentLocation);
+								tempL.setTotalNum(tempL.getTotalNum() + 1);
+							} else {
+								tempL = null;
+							}
+						} else {
+
+						}
+					}
+					if (null == tempL) {
+						L tL = new L();
+						tL.setIndex(currentLocation);
+						tL.setStartNum(currentLocation);
+						tL.setTotalNum(1);
+						tL.setEndNum(currentLocation);
+						lList.add(tL);
+					}
+				} else {
+
+				}
+
+				L l = rapperMain.getL(i, num);
+				sum++;
+				// l.addCompareRapper(i,num);
+				if ((currentLocation - lastLocation) == 1) {
 					System.out.println("begin------------------" + i + "-----" + num + ",sum:" + sum);
-				}else{
+				} else {
 					System.out.println("end-----" + i + "------" + num + ",sum:" + sum);
 				}
-//				System.out.println(i	 + " ---" + num);
+				// System.out.println(i + " ---" + num);
 				lastLocation = i;
 			}
 		}
 		System.out.println("sum:" + sum);
+
+		for (int i = 0; i < lList.size(); i++) {
+			System.out.println(lList.get(i).getStartNum() + "," + lList.get(i).getTotalNum());
+		}
+	}
+
+	private static List<L> lList = new ArrayList<L>();
+
+	public L getL(int location, int num) {
+		L l = null;
+		// 遍历查询
+		for (L tempL : lList) {
+			int totalNum = tempL.getTotalNum();
+			int index = tempL.getIndex();
+			for (int i = 0; i < totalNum; i++) {
+
+			}
+		}
+		return l;
+	}
+
+	public L getNextL(int location, int num) {
+		L l = null;
+		for (L tempL : lList) {
+			int totalNum = tempL.getTotalNum();
+			int index = tempL.getIndex();
+		}
+		return l;
 	}
 
 }

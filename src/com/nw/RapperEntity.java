@@ -16,7 +16,9 @@ public class RapperEntity {
 	public RapperEntity(){
 		
 	}
-	
+	public String getGroupName(){
+		return groupName;
+	}
 	public RapperEntity(String groupName,int cycleTime,int runTime){
 		this.cycleTime = cycleTime;
 		this.runTime = runTime;
@@ -27,7 +29,7 @@ public class RapperEntity {
 	}
 	
 	public void subCount(){
-		if(this.count > 1){
+		if(this.count > 0){
 			this.count = this.count - 1;
 			this.strList.add("_");
 		}else{
@@ -35,6 +37,7 @@ public class RapperEntity {
 				this.runCount = this.runCount - 1;
 				this.strList.add("+");
 			}else{
+				this.strList.add("_");
 				this.runCount = runTime;
 				this.count = this.waitTime;
 			}
